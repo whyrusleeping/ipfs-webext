@@ -13,3 +13,14 @@ Setup is a little weird currently,this isnt polished at all.
 - Click "Load Temporary Add-on" and navigate to and select the `manifest.json` file in this directory.
 - Try loading pages like `https://ipfs.io/ipns/ipfs.io` and it should redirect to localhost.
 - Do a little dance, and get yourself some coffee
+
+## Potential Future Architecture
+The way i see this extension working when "done" is roughly as follows:
+- Extension ships with a small shell script that is able to download an `ipfs-manager` type program that does a few things:
+	- communications with firefox via nativeMessaging (does the length prefixed json message stuff)
+	- Is able to download, init, start and stop an ipfs daemon
+	- Is able to control the ipfs daemon via messages from the webextension
+
+All requests to the ipfs.io gateway should be redirected locally, and the protocol handlers for fs:// should be respected.
+
+Done this way, the extension can self-update and provide a seamless user experience. 
