@@ -1,0 +1,7 @@
+{
+  "name": "ipfs",
+  "description": "lets have firefox run ipfs",
+  "path": "/home/whyrusleeping/code/webext/ipfs-try1/run-ipfs.sh",
+  "type": "stdio",
+  "allowed_extensions": [ "ipfs@example.org" ]
+}
