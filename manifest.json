@@ -24,9 +24,10 @@
   },
  
   "permissions": [
-	  "nativeMessaging",
-	  "webRequest",
-	  "webRequestBlocking"
+    "nativeMessaging",
+    "webRequest",
+    "webRequestBlocking",
+    "downloads"
   ]
 
 }
