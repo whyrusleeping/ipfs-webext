@@ -1,16 +1,17 @@
 {
-
-  "description": "ipfs daemon test thing",
+	"key":"MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAx0UNIg9OL7G3Q1m4aeaTrXCoSkoDm3K/bxbDnfi0SerWpHnl114MpJBw8I0fXwhpy9zzPuqVUM3jh7bZSlgcVE+57NdD3kswL35CHbmgo5DiaO6VjnLfh4mr0p7zoktnrfTAChT5fP2l+1mV2kro3GhMC5Ao61H3vCOLFbUJAveUcMeTvSQxIVWKTDqsB1C73JYO4sMTzDZnHrFMB8pZXLHlju4cE1LHEAYb4JSCO9w+qSd9gOdOy/hEtgpbaRnYny2juzv7q2ZsRa53DwPLkZ1aNWRv34pXJI3GqoIOvuNcbRSXhyPxLJlUiDP4c/MgDRiVTbdFK9O3dodCLsxcpQIDAQAB",
+  "description": "The Ipfs web extension",
   "manifest_version": 2,
-  "name": "ipfs IN DA BROWSER",
+  "name": "IPFS",
   "version": "1.0",
   "icons": {
-    "48": "icons/message.svg"
+    "48": "icons/ipfs-logo-vector-ice.svg",
+    "128": "icons/ipfs-logo-vector-ice.svg"
   },
 
   "applications": {
     "gecko": {
-      "id": "ipfs@example.org",
+      "id": "ipfs@ipfs.io",
       "strict_min_version": "50.0"
     }
   },
@@ -26,7 +27,10 @@
   "permissions": [
 	  "nativeMessaging",
 	  "webRequest",
-	  "webRequestBlocking"
+	  "webRequestBlocking",
+	  "tabs",
+	  "*://*.ipfs.io/",
+	  "*://ipfs.io/",
+	  "https://*/"
   ]
-
 }

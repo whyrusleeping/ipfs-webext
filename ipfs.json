@@ -1,7 +1,10 @@
 {
   "name": "ipfs",
-  "description": "lets have firefox run ipfs",
-  "path": "/home/whyrusleeping/code/webext/ipfs-try1/run-ipfs.sh",
+  "description": "Ipfs native binary connector",
+  "path": "XXRUNIPFSPATHXX",
   "type": "stdio",
-  "allowed_extensions": [ "ipfs@example.org" ]
+  "allowed_extensions": [ "ipfs@ipfs.io" ],
+  "allowed_origins": [
+	"chrome-extension://fbckomgooapkmiohkbkhohfmoeppmfhd/"
+  ]
 }
