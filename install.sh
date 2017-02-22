@@ -6,9 +6,6 @@ IPFS_VERS="v0.4.5"
 LOCAL_APP_DIR="$HOME/.local/share/ipfs-web"
 IPFS_BIN_PATH="$LOCAL_APP_DIR/run-ipfs.sh"
 
-browser="chrome"
-
-
 # init colors
 txtnon='\e[0m'    # color reset
 txtred='\e[0;31m' # Red
@@ -52,55 +49,72 @@ function installNativeHook() {
 
 	trgtdir=$(hostsPath $browser)
 
-	if ! mkdir -p "$trgtdir"; then
+	echo "  > ensure $trgtdir exists..."
+	mkdir -p "$trgtdir" ||
 		fail "could not create standard native messaging directory: $trgtdir"
-	fi
 
-	if ! sed "s#XXRUNIPFSPATHXX#$runipfsbin#g" ipfs.json > "$trgtdir/ipfs.json" ; then
+	echo "  > write native messaging host file"
+	sed "s#XXRUNIPFSPATHXX#$runipfsbin#g" ipfs.json > "$trgtdir/ipfs.json" ||
 		fail "failed to write ipfs.json file"
-	fi
+
+	echo "  > complete"
 }
 
-notice "Step 1: Install native messaging hook"
+function installForBrowser() {
+	browser="$1"
+	notice "Installing ipfs web extension for $browser"
 
-installNativeHook "$IPFS_BIN_PATH" "chromium"
+	notice "Step 1: Install native messaging hook"
 
-notice "Step 2: Install extension files to application directory"
+	installNativeHook "$IPFS_BIN_PATH" "$browser"
 
-if ! mkdir -p "$LOCAL_APP_DIR"; then
-	fail "could not create entry in local application directory: $LOCAL_APP_DIR"
-fi
+	notice "Step 2: Install extension files to application directory"
 
-export IPFS_PATH="$LOCAL_APP_DIR/repo"
+	echo "  > ensure $LOCAL_APP_DIR exists..."
+	mkdir -p "$LOCAL_APP_DIR" ||
+		fail "could not create entry in local application directory: $LOCAL_APP_DIR"
 
-if ! cp dist_get run-ipfs.sh "$LOCAL_APP_DIR/"; then
-	fail "could not copy files into app dir"
-fi
+	export IPFS_PATH="$LOCAL_APP_DIR/repo"
 
-cd "$LOCAL_APP_DIR" || exit 1
+	echo "  > move extension scripts into place"
+	cp dist_get run-ipfs.sh "$LOCAL_APP_DIR/" ||
+		fail "could not copy files into app dir"
 
-if ! chmod +x dist_get run-ipfs.sh; then
-	fail "failed to set execute bit on installed scripts"
-fi
+	cd "$LOCAL_APP_DIR" ||
+		exit 1
 
-notice "Step 3: Download ipfs"
+	chmod +x dist_get run-ipfs.sh ||
+		fail "failed to set execute bit on installed scripts"
 
-if test -f ./bin/ipfs; then
-	warn "> found previously downloaded ipfs binary, skipping download"
-else
-	if ! ./dist_get $DIST go-ipfs ./bin/ipfs $IPFS_VERS ipfs; then
-		fail "failed to fetch ipfs binary"
+	echo "  > complete"
+
+	notice "Step 3: Download ipfs"
+
+	if test -f ./bin/ipfs; then
+		warn "  > found previously downloaded ipfs binary, skipping download"
+	else
+		if ! ./dist_get $DIST go-ipfs ./bin/ipfs $IPFS_VERS ipfs; then
+			fail "failed to fetch ipfs binary"
+		fi
 	fi
-fi
 
+	echo "  > complete"
 
-notice "Step 4: Init IPFS"
-if test -f "$IPFS_PATH/config"; then
-	warn "> an ipfs node has already been initialized in the extensions app directory"
-else
-	if ! ./bin/ipfs init; then
-		fail "ipfs node initialization failed"
+	notice "Step 4: Init IPFS"
+	if test -f "$IPFS_PATH/config"; then
+		warn "  > an ipfs node has already been initialized in the extensions app directory"
+	else
+		if ! ./bin/ipfs init; then
+			fail "ipfs node initialization failed"
+		fi
 	fi
+
+	notice "Installation Complete!"
+}
+
+BROWSER="$1"
+if [ -z "$BROWSER" ]; then
+	BROWSER="firefox"
 fi
 
-notice "Installation Complete!"
+installForBrowser "$BROWSER"
