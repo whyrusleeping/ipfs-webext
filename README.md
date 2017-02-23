@@ -12,6 +12,12 @@ On linux and OSX, the install script *should* work (though no guarantees, its ve
 ./install.sh $BROWSER
 ```
 
+Once that completes, load the extension into your browser. 
+For firefox, go to `about:debugging` and click "Load Temporary Add-on". Navigate to the `manifest.json` file in this directory and select it.
+For chrome, go to `chrome://extensions` and select "Load unpacked extension". Navigate to this directory, and select it (select the directory itself, not the `manifest.json` file).
+
+Now, assuming it all worked properly, you should be able to visit any site in ipfs via the ipfs.io gateway and be redirected to your locally running ipfs node.
+
 ### Manual Installation
 - Edit the `ipfs.json` file so that the `path` field points to the script in this repo (wherever you happened to have cloned it).
 - Move the `ipfs.json` file to be inside `~/.mozilla/native-message-hosts/` (this path is different for each OS and browser)

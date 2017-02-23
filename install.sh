@@ -104,9 +104,8 @@ function installForBrowser() {
 	if test -f "$IPFS_PATH/config"; then
 		warn "  > an ipfs node has already been initialized in the extensions app directory"
 	else
-		if ! ./bin/ipfs init; then
+		./bin/ipfs init ||
 			fail "ipfs node initialization failed"
-		fi
 	fi
 
 	notice "Installation Complete!"

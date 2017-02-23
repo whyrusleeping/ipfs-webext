@@ -5,8 +5,8 @@
   "name": "IPFS",
   "version": "1.0",
   "icons": {
-    "48": "icons/ipfs-logo-vector-ice.svg",
-    "128": "icons/ipfs-logo-vector-ice.svg"
+    "48": "icons/ipfs-48.png",
+    "128": "icons/ipfs-128.png"
   },
 
   "applications": {
