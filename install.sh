@@ -42,6 +42,16 @@ function hostsPath() {
 	esac
 }
 
+function filterForBrowser() {
+	case "$1" in
+		"firefox")
+			grep -v "allowed_origins"
+			;;
+		"chromium" | "googlechrome")
+			grep -v "allowed_extensions"
+			;;
+	esac
+}
 
 function installNativeHook() {
 	runipfsbin="$1"
@@ -54,7 +64,7 @@ function installNativeHook() {
 		fail "could not create standard native messaging directory: $trgtdir"
 
 	echo "  > write native messaging host file"
-	sed "s#XXRUNIPFSPATHXX#$runipfsbin#g" ipfs.json > "$trgtdir/ipfs.json" ||
+	sed "s#XXRUNIPFSPATHXX#$runipfsbin#g" ipfs.json | filterForBrowser "$browser" > "$trgtdir/ipfs.json" ||
 		fail "failed to write ipfs.json file"
 
 	echo "  > complete"

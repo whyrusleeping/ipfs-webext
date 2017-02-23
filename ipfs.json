@@ -2,9 +2,7 @@
   "name": "ipfs",
   "description": "Ipfs native binary connector",
   "path": "XXRUNIPFSPATHXX",
-  "type": "stdio",
   "allowed_extensions": [ "ipfs@ipfs.io" ],
-  "allowed_origins": [
-	"chrome-extension://fbckomgooapkmiohkbkhohfmoeppmfhd/"
-  ]
+  "allowed_origins": [ "chrome-extension://fbckomgooapkmiohkbkhohfmoeppmfhd/" ],
+  "type": "stdio"
 }
