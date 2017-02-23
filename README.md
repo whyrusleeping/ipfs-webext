@@ -14,11 +14,23 @@ On linux and OSX, the install script *should* work (though no guarantees, its ve
 
 Once that completes, load the extension into your browser. 
 
-For firefox, go to `about:debugging` and click the "Load Temporary Add-on" button on the right. In the file explorer that pops up, navigate to this directory and select the `manifest.json` file. 
+#### Firefox
+For firefox, go to `about:debugging` and click the "Load Temporary Add-on"
+button on the right. In the file explorer that pops up, navigate to this
+directory and select the `manifest.json` file. 
 
-For chrome, go to `chrome://extensions` and click the "Load unpacked extension" button at the top. In the file explorer that pops up, navigate to this directory, and select it (select the directory itself, not the `manifest.json` file).
+#### Chromium
+For chrome, go to `chrome://extensions` and click the "Load unpacked extension"
+button at the top. In the file explorer that pops up, navigate to this
+directory, and select it (select the directory itself, not the `manifest.json`
+file).
 
-Now, assuming it all worked properly, you should be able to visit any site in ipfs via the ipfs.io gateway and be redirected to your locally running ipfs node.
+#### Try it out!
+Now, assuming it all worked properly, you should be able to visit any site in
+ipfs via the ipfs.io gateway and the request will be automatically redirected
+to your locally running ipfs node. Try going to something like
+https://ipfs.io/ipfs/QmZNtENBtGvgzPED3Uqt6zxxKAkCGWWQ1XedBVAH7agGSZ and watch
+the url bar change from ipfs.io to localhost.
 
 ### Manual Installation
 If the previous instructions didnt work, you can try to do what the install script does manually:
