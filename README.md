@@ -41,3 +41,12 @@ The way i see this extension working when "done" is roughly as follows:
 All requests to the ipfs.io gateway should be redirected locally, and the protocol handlers for fs:// should be respected.
 
 Done this way, the extension can self-update and provide a seamless user experience. 
+
+## Troubleshooting
+If the installation doesnt work, please file an issue. 
+
+If the installation succeeds, but the extension doesnt appear to be working properly, here are a few things to try:
+
+In firefox, error messages from the process get sent to the developer console. Check here for any issues. In chrome, error messages get sent out to chromes error logs on stderr. To see these, you'll need to start chrome from a terminal.
+
+Check if an ipfs daemon is running with: `ps aux | grep ipfs`
