@@ -4,6 +4,10 @@ This is a demo of running ipfs from a webextension.
 
 ## Usage
 
+### Install Go
+
+This requires Go 1.7 or higher. If you don't have it: [Download Go 1.7+](https://golang.org/dl/).
+
 ### Install script
 On linux and OSX, the install script *should* work (though no guarantees, its very new and not well tested)
 
